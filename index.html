@@ -53,6 +53,18 @@
     </form>
 
     </article>
+
+    <section class="calendar-box">
+        <div class="cal-header">
+            <button type="button" id="cal-prev" class="cal-nav">‹</button>
+            <div id="cal-title" class="cal-title"></div>
+            <button type="button" id="cal-next" class="cal-nav">›</button>
+        </div>
+        
+        <div class="calendar-scroll">
+            <table class="calendar" id="calendar"></table>
+        </div>
+    </section>
 </aside>
 </main>
 
@@ -114,6 +126,57 @@ window.addEventListener("load", function() {
         }
     });
 });
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const calTitleEl = document.getElementById("cal-title");
+        const calTableEl = document.getElementById("calendar");
+        const prevBtn = document.getElementById("cal-prev");
+        const nextBtn = document.getElementById("cal-next");
+        const today = new Date();
+        let viewYear = today.getFullYear();
+        let viewMonth = today.getMonth();
+        function renderCalendar(y, m) {
+            calTitleEl.textContent = `${y}년 ${m + 1}월`;
+            const weekdays = ["일","월","화","수","목","금","토"];
+            const thead = `<thead><tr>${weekdays.map(d => `<th>${d}</th>`).join("")}</tr></thead>`;
+            const first = new Date(y, m, 1);
+            const last  = new Date(y, m + 1, 0);
+            const firstDay = first.getDay();
+            const total = last.getDate();
+            const cells = [];
+            for (let i = 0; i < firstDay; i++) cells.push("");
+            for (let d = 1; d <= total; d++) cells.push(d);
+            const rows = [];
+            for (let i = 0; i < cells.length; i += 7) rows.push(cells.slice(i, i + 7));
+            const lastRow = rows[rows.length - 1];
+            if (lastRow && lastRow.length < 7) while (lastRow.length < 7) lastRow.push("");
+            const isThisMonth = (y === today.getFullYear() && m === today.getMonth());
+            let tbody = "<tbody>";
+                rows.forEach(week => {
+                    tbody += "<tr>";
+                        week.forEach(val => {
+                            const isToday = isThisMonth && val === today.getDate();
+                            tbody += `<td${isToday ? ' class="is-today"' : ""}>${val || ""}</td>`;
+                            });
+                            tbody += "</tr>";
+                        });
+                        tbody += "</tbody>";
+                        calTableEl.innerHTML = thead + tbody;
+                    }
+                    renderCalendar(viewYear, viewMonth);
+                    prevBtn.addEventListener("click", () => {
+                        viewMonth--;
+                        if (viewMonth < 0) { viewMonth = 11; viewYear--; }
+                        renderCalendar(viewYear, viewMonth);
+                    });
+                    nextBtn.addEventListener("click", () => {
+                        viewMonth++;
+                        if (viewMonth > 11) { viewMonth = 0; viewYear++; }
+                        renderCalendar(viewYear, viewMonth);
+                    });
+                    });
 </script>
 </body>
 </html>

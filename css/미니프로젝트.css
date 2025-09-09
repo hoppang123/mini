@@ -200,3 +200,79 @@ header {
 .close:hover {
     color: red;
 }
+
+aside {
+    width: 280px;
+    margin: 20px;
+}
+
+.login-card {
+    position: static !important;
+    top: auto !important;
+    left: auto !important;
+    width: 100%;
+    margin: 0 0 16px;
+    z-index: auto;
+}
+
+.calendar-box {
+    width: 100%;
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 12px;
+    margin: 0 0 20px;
+    box-sizing: border-box;
+}
+
+.cal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+.cal-title {
+    font-weight: 700;
+    text-align: center;
+    flex: 1;
+}
+
+.cal-nav {
+    border: 1px solid #ddd;
+    background: #f4f4f4;
+    border-radius: 6px;
+    width: 28px;
+    height: 28px;
+    cursor: pointer;
+}
+
+.calendar-scroll {
+    max-height: 220px;
+    overflow-y: auto;
+}
+
+.calendar {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+    font-size: 12px;
+}
+
+.calendar th, .calendar td {
+    border: 1px solid #eee;
+    padding: 6px 0;
+    width: calc(100% / 7);
+}
+
+.calendar thead th {
+    background: #f9f9f9;
+    font-weight: 700;
+}
+
+.calendar td.is-today {
+    background: #111;
+    color: #fff;
+    font-weight: 700;
+}
