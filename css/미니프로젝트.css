@@ -162,3 +162,42 @@ header {
     margin: 0;
     padding: 0;
 }
+
+#login-message {
+    margin-top: 10px;
+    font-size: 13px;
+    text-align: center;
+    color: red;
+}
+#login-message.success {
+    color: green;
+}
+
+.modal {
+  display: none; /* 처음엔 안 보임 */
+  position: fixed;
+  z-index: 999;
+  left: 0; top: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.5);
+}
+
+/* 모달 내용 */
+.modal-content {
+  background: #fff;
+  margin: 15% auto;
+  padding: 20px;
+  border-radius: 10px;
+  max-width: 400px;
+  text-align: center;
+}
+
+/* 닫기 버튼 */
+.close {
+  float: right;
+  font-size: 24px;
+  cursor: pointer;
+}
+.close:hover {
+  color: red;
+}

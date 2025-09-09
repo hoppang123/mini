@@ -43,10 +43,12 @@
         <button type="button" class="login-btn">로그인</button>
         
         <div class="login-links">
-            <a href="#">회원가입</a>
+            <a href="회원가입.html">회원가입</a>
             <span class="divider">|</span>
             <a href="#">비밀번호 찾기</a>
         </div>
+
+        <div id="login-message"></div>
     
     </form>
 
@@ -54,5 +56,64 @@
 </aside>
 </main>
 
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const userIdInput = document.getElementById("user_id");
+        const userPwInput = document.getElementById("user_pw");
+        const loginBtn = document.querySelector(".login-btn");
+        const msgBox = document.getElementById("login-message");
+
+        loginBtn.addEventListener("click", function (e) {
+            e.preventDefault();
+            const idValue = userIdInput.value.trim();
+            const pwValue = userPwInput.value.trim();
+            msgBox.classList.remove("success");
+            msgBox.textContent = "";
+            
+            if (idValue.length === 0 && pwValue.length === 0) {
+                msgBox.textContent = "아이디와 비밀번호를 입력해주세요";
+            } else if (idValue.length === 0) {
+                msgBox.textContent = "아이디를 입력해주세요";
+            } else if (pwValue.length === 0) {
+                msgBox.textContent = "비밀번호를 입력해주세요";
+            } else if (idValue.length <= 6) {
+                msgBox.textContent = "아이디가 6글자 이하입니다";
+            } else if (pwValue.length <= 6) {
+                msgBox.textContent = "비밀번호가 6글자 이하입니다";
+            } else {
+                msgBox.textContent = "로그인 되셨습니다";
+                msgBox.classList.add("success");
+            }
+        });
+        
+        });
+</script>
+
+<div id="notice-modal" class="modal">
+    <div class="modal-content">
+        <span id="close-modal" class="close">&times;</span>
+        <h2>공지사항</h2>
+        <p>이번 주말에는 서버 점검이 예정되어 있습니다.<br><br>불편을 드려 죄송합니다.</p>
+    </div>
+</div>
+
+<script>
+window.addEventListener("load", function() {
+    const modal = document.getElementById("notice-modal");
+    const closeBtn = document.getElementById("close-modal");
+
+    modal.style.display = "block";
+
+    closeBtn.addEventListener("click", function() {
+        modal.style.display = "none";
+    });
+
+    window.addEventListener("click", function(e) {
+        if (e.target === modal) {
+            modal.style.display = "none";
+        }
+    });
+});
+</script>
 </body>
 </html>
